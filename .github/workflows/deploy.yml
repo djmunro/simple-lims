@@ -23,17 +23,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Login to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_email: ${{ secrets.HEROKU_EMAIL }} // Heroku email address
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }} // Heroku API key
-          heroku_app_name: ${{ env.HEROKU_APP_NAME }} // Declared above
-          justlogin: true
+      - name: Authenticate with Heroku
+        run: |
+          echo "machine api.heroku.com login ${{ secrets.HEROKU_EMAIL }} password ${{ secrets.HEROKU_API_KEY }}" > ~/.netrc
+          echo "machine git.heroku.com login ${{ secrets.HEROKU_EMAIL }} password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
 
-      - name: Add Heroku remote
-        run: heroku git:remote --app=simple-lims
-
-      - name: Push to main branch app on Heroku
-        run: git push heroku main
-        # run: git push heroku ${{ github.ref_name }}:main --force
+      - name: Deploy to Heroku
+        run: |
+          heroku git:remote --app=simple-lims
+          git push heroku main
