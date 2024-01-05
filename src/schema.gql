@@ -1,0 +1,47 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Workflow {
+  id: Int!
+  name: String!
+  sampleId: Int!
+  sample: Sample!
+}
+
+type Sample {
+  id: Int!
+  reprocessCount: Int!
+  barcode: Int!
+  workflows: [Workflow!]
+}
+
+type Query {
+  samples: [Sample!]!
+  sample(id: Int!): Sample!
+  workflows: [Workflow!]!
+  workflow(id: Int!): Workflow!
+}
+
+type Mutation {
+  createSample(createSampleInput: CreateSampleInput!): Sample!
+  createWorkflow(createWorkflowInput: CreateWorkflowInput!): Workflow!
+  updateWorkflow(updateWorkflowInput: UpdateWorkflowInput!): Workflow!
+  removeWorkflow(id: Int!): Workflow!
+}
+
+input CreateSampleInput {
+  reprocessCount: Int!
+  barcode: Int!
+}
+
+input CreateWorkflowInput {
+  name: String!
+  sampleId: Int!
+}
+
+input UpdateWorkflowInput {
+  name: String
+  sampleId: Int
+  id: Int!
+}
