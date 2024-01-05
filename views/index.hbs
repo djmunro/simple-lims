@@ -1,17 +1,39 @@
 <html>
   <head>
     <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
     <title>App</title>
+    <link rel='stylesheet' href='css/mystyles.css' />
   </head>
   <body>
-    <h2>Samples</h2>
-    <ul>
-      {{#each samples}}
-        <li>ID:
-          {{id}}, Reprocess Count:
-          {{reprocessCount}}, Barcode:
-          {{barcode}}</li>
-      {{/each}}
-    </ul>
+    <div class='container'>
+      <h1 class='title is-1'>
+        Simple LIMS
+      </h1>
+
+      <p class='subtitle'>
+        LIMS sandbox for testing tools and technologies.
+      </p>
+
+      <h2 class='subtitle is-2'>Samples</h2>
+      <table class='table is-fullwidth'>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Barcode</th>
+            <th>Reprocess Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each samples}}
+            <tr>
+              <td><a href='/sample/{{id}}'>{{id}}</a></td>
+              <td>{{reprocessCount}}</td>
+              <td>{{barcode}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

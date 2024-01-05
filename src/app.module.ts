@@ -7,6 +7,7 @@ import { join } from 'path';
 import { ApolloDriver } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { WorkflowModule } from './workflow/workflow.module';
+import { SampleController } from './sample/sample.controller';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { WorkflowModule } from './workflow/workflow.module';
     SampleModule,
     WorkflowModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, SampleController],
   providers: [AppService],
 })
 export class AppModule {}
